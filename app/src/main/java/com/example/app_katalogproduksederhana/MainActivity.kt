@@ -122,6 +122,62 @@ fun CatalogHeader(title: String, subtitle: String) {
     }
 }
 
+// ==========================================
+// CUSTOM COMPOSABLE 2: PRODUCT CARD
+// ==========================================
+@Composable
+fun ProductCard(productName: String, category: String, price: String, rating: Double) {
+    // 3. Menggunakan Card wajib
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(8.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        // 4. Menggunakan Row untuk membagi sisi kiri (teks) dan kanan (harga/rating) (Wajib)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Kolom Kiri: Nama dan Kategori
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = productName,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = category,
+                    style = MaterialTheme.typography.labelMedium,
+                    color = Color.Gray
+                )
+            }
+
+            // Kolom Kanan: Harga dan Rating
+            Column(horizontalAlignment = Alignment.End) {
+                Text(
+                    text = price,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold
+                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Filled.Star, // Menggunakan Icon wajib
+                        contentDescription = "Rating",
+                        tint = Color(0xFFFFC107), // Warna kuning emas
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(text = rating.toString(), style = MaterialTheme.typography.bodySmall)
+                }
+            }
+        }
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
