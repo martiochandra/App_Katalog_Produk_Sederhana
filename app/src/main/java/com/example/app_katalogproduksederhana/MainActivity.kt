@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.app_katalogproduksederhana.ui.theme.AppKatalogProdukSederhanaTheme
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -164,12 +165,7 @@ fun ProductCard(productName: String, category: String, price: String, rating: Do
                     fontWeight = FontWeight.Bold
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Filled.Star, // Menggunakan Icon wajib
-                        contentDescription = "Rating",
-                        tint = Color(0xFFFFC107), // Warna kuning emas
-                        modifier = Modifier.size(16.dp)
-                    )
+                    Text(text = "Rating: " + rating.toString(), style = MaterialTheme.typography.bodySmall)
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(text = rating.toString(), style = MaterialTheme.typography.bodySmall)
                 }
@@ -178,11 +174,34 @@ fun ProductCard(productName: String, category: String, price: String, rating: Do
     }
 }
 
-
-@Preview(showBackground = true)
+// ==========================================
+// CUSTOM COMPOSABLE 3: FOOTER
+// ==========================================
 @Composable
-fun GreetingPreview() {
+fun CatalogFooter() {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        // 5. Menggunakan Button Wajib
+        Button(
+            onClick = { /* Interaksi belum wajib minggu ini */ },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+
+            Spacer(modifier = Modifier.width(8.dp))
+            Text("Lihat Semua Produk")
+        }
+    }
+}
+
+// ==========================================
+// PREVIEW
+// ==========================================
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun CatalogScreenPreview() {
     AppKatalogProdukSederhanaTheme {
-        Greeting("Android")
+        CatalogScreen()
     }
 }
