@@ -29,12 +29,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            // Pastikan menggunakan nama Theme project Anda
             AppKatalogProdukSederhanaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    // Memanggil fungsi layar utama
+                    CatalogScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -89,6 +88,40 @@ fun CatalogScreen(modifier: Modifier = Modifier) {
         CatalogFooter()
     }
 }
+
+
+// ==========================================
+// CUSTOM COMPOSABLE 1: HEADER
+// ==========================================
+@Composable
+fun CatalogHeader(title: String, subtitle: String) {
+    // 2. Menggunakan Box untuk header background (Wajib)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .shadow(4.dp, RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.primaryContainer) // Styling modifier wajib
+            .padding(24.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.headlineMedium, // Material Theme Typography wajib
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
+            )
+        }
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
